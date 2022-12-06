@@ -1,30 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
-import ParentsComponents from './components/ParentsComponents/ParentsComponents';
-import { useState } from 'react';
+import "./App.css";
+import { createContext, useState } from "react";
+import ParentsComponents from "./components/ParentsComponents/ParentsComponents";
 
-
+export const Counter_Context = createContext();
 
 function App() {
-  const [number, setNumber] = useState(0)
+  const [number, setNumber] = useState(0);
 
-  const incrise =()=>{
+  const incrise = () => {
     setNumber(number + 1);
-  }
-  const decrise =()=>{
+  };
+
+  const decrise = () => {
     setNumber(number - 1);
-  }
+  };
+
+  const value = { incrise, decrise, number, setNumber };
 
   return (
     <div className="App">
-      <header className="App-header">
-        <h1> Reducer Practice</h1>
-        <button onClick={incrise}> incrise</button>
-         <p>{number}</p>
-        <button onClick={decrise}> decrise</button>
-        <ParentsComponents></ParentsComponents>
-       
-      </header>
+      <h1> Reducer Practice</h1>
+      <Counter_Context.Provider value={value}>
+        <div>
+          <ParentsComponents />
+        </div>
+      </Counter_Context.Provider>
     </div>
   );
 }
