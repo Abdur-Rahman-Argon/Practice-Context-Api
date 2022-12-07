@@ -1,36 +1,38 @@
 import React, { createContext, useReducer } from "react";
+import { actionTypes } from "../../State/ActionTypes";
+import { initialState, reducer } from "../../State/fromReducer";
 
 export const From_Context = createContext();
 const InformationFrom = () => {
-  const initialState = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    gender: "",
-    education: "",
-    PCs: 0,
-    term: false,
-  };
+  //   const initialState = {
+  //     firstName: "",
+  //     lastName: "",
+  //     email: "",
+  //     gender: "",
+  //     education: "",
+  //     PCs: 0,
+  //     term: false,
+  //   };
 
-  const reducer = (state, action) => {
-    // console.log(action);
-    switch (action.type) {
-      case "INPUT":
-        return { ...state, [action.payload.name]: action.payload.value };
+  //   const reducer = (state, action) => {
+  //     // console.log(action);
+  //     switch (action.type) {
+  //       case "INPUT":
+  //         return { ...state, [action.payload.name]: action.payload.value };
 
-      case "TOGGLE":
-        return { ...state, term: !state.term };
+  //       case "TOGGLE":
+  //         return { ...state, term: !state.term };
 
-      case "INCREMENT":
-        return { ...state, PCs: state.PCs + 1 };
+  //       case "INCREMENT":
+  //         return { ...state, PCs: state.PCs + 1 };
 
-      case "DECREMENT":
-        return { ...state, PCs: state.PCs - 1 };
+  //       case "DECREMENT":
+  //         return { ...state, PCs: state.PCs - 1 };
 
-      default:
-        return state;
-    }
-  };
+  //       default:
+  //         return state;
+  //     }
+  //   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -55,7 +57,7 @@ const InformationFrom = () => {
               id="firstName"
               onBlur={(e) =>
                 dispatch({
-                  type: "INPUT",
+                  type: actionTypes.INPUT,
                   payload: { name: e.target.name, value: e.target.value },
                 })
               }
@@ -74,7 +76,7 @@ const InformationFrom = () => {
               id="lastName"
               onBlur={(e) =>
                 dispatch({
-                  type: "INPUT",
+                  type: actionTypes.INPUT,
                   payload: { name: e.target.name, value: e.target.value },
                 })
               }
@@ -93,7 +95,7 @@ const InformationFrom = () => {
               id="email"
               onBlur={(e) =>
                 dispatch({
-                  type: "INPUT",
+                  type: actionTypes.INPUT,
                   payload: { name: e.target.name, value: e.target.value },
                 })
               }
@@ -114,7 +116,7 @@ const InformationFrom = () => {
                   id="male"
                   onClick={(e) =>
                     dispatch({
-                      type: "INPUT",
+                      type: actionTypes.INPUT,
                       payload: { name: e.target.name, value: e.target.value },
                     })
                   }
@@ -131,7 +133,7 @@ const InformationFrom = () => {
                   id="female"
                   onClick={(e) =>
                     dispatch({
-                      type: "INPUT",
+                      type: actionTypes.INPUT,
                       payload: { name: e.target.name, value: e.target.value },
                     })
                   }
@@ -148,7 +150,7 @@ const InformationFrom = () => {
                   id="Custom"
                   onClick={(e) =>
                     dispatch({
-                      type: "INPUT",
+                      type: actionTypes.INPUT,
                       payload: { name: e.target.name, value: e.target.value },
                     })
                   }
@@ -170,7 +172,7 @@ const InformationFrom = () => {
                 id="education"
                 onChange={(e) =>
                   dispatch({
-                    type: "INPUT",
+                    type: actionTypes.INPUT,
                     payload: { name: e.target.name, value: e.target.value },
                   })
                 }
@@ -194,7 +196,7 @@ const InformationFrom = () => {
               <label className=" mx-1">PCs</label>
               <div>
                 <span
-                  onClick={() => dispatch({ type: "DECREMENT" })}
+                  onClick={() => dispatch({ type: actionTypes.DECREMENT })}
                   className=" cursor-pointer px-3 rounded-lg bg-slate-300"
                 >
                   -
@@ -205,7 +207,7 @@ const InformationFrom = () => {
               </div>
               <div>
                 <span
-                  onClick={() => dispatch({ type: "INCREMENT" })}
+                  onClick={() => dispatch({ type: actionTypes.INCREMENT })}
                   className=" cursor-pointer px-3 rounded-lg bg-slate-300"
                 >
                   +
@@ -220,7 +222,7 @@ const InformationFrom = () => {
                 name="checkbox"
                 id="checkbox"
                 value="checkbox"
-                onClick={() => dispatch({ type: "TOGGLE" })}
+                onClick={() => dispatch({ type: actionTypes.TOGGLE })}
               />
               <br />
               <label className=" mx-1" htmlFor="education">
@@ -232,6 +234,7 @@ const InformationFrom = () => {
               <button
                 className=" px-3 rounded-lg text-xl font-medium uppercase bg-green-600"
                 type="submit"
+                disabled={!state.term}
               >
                 Submit
               </button>
